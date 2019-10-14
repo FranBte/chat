@@ -19,6 +19,12 @@ class APIClient {
     return content;
   }
 
+  async getAllMessages() {
+    const apiCall = this.url;
+    const response = await fetch(apiCall);
+    const data = await response.json();
+    return data;
+  }
 
 }
 
