@@ -1,0 +1,23 @@
+.ChatInput {
+  height: 2.75rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  font-size: 2rem;
+  margin: 0 1rem;
+  padding: 1rem;
+  border: 2px solid #2e77a3;
+  caret-color: #2e77a3;
+  font-family: "Fira Sans", sans-serif;
+}
+
+.ChatInput:focus {
+  outline: 2px solid transparent;
+}
+
+@media screen and (min-width: 640px) {
+  .ChatInput {
+    /* calculating how big input should be 
+    640px (minus 80px (button) - 8px margin between input and button , -48px off of sides) */
+    width: 61rem;
+  }
+}
