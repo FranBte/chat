@@ -41,6 +41,35 @@ class ChatController extends Component {
     }
   };
 
+  componentDidMount() {
+    let isFirstRun = true;
+    this.interval = setInterval(() => {
+      if (this.state.hasChatStarted) {
+        // begin chat and get all messages
+        if (isFirstRun) {
+          const getPromise = this.APIClient.getAllMessages();
+          getPromise
+            .then(data => {
+              this.setState({ messages: data });
+              window.scrollTo(0, document.querySelector("body").scrollHeight);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          isFirstRun = false;
+        }
+
+        
+      }
+    }, 1000);
+
+    console.log("component did mount");
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  
   render() {
     return (
       <section className="ChatController">
