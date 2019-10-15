@@ -23,12 +23,21 @@ class ChatController extends Component {
     });
   };
 
-
   getUserName = e => {
     if (e.target.value.length >= 1) {
       this.setState({
         name: e.target.value
       });
+    }
+  };
+
+  startChat = () => {
+    if (this.state.name.length >= 1) {
+      this.setState({
+        hasChatStarted: true
+      });
+    } else {
+      alert("Input a name to start chatting");
     }
   };
 
