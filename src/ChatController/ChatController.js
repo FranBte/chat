@@ -57,9 +57,37 @@ class ChatController extends Component {
               console.log(error);
             });
           isFirstRun = false;
+        } else {
+          // if there are messages, get the last message from known messages
+          timestamp =
+            this.state.messages[this.state.messages.length - 1].timestamp - 1;
         }
-
-        
+        const getPromise = this.APIClient.getLastTenMessages(timestamp);
+        let allMessages = [...this.state.messages];
+        getPromise
+          .then(data => {
+            // check if last message in known messages is equal to first message in last 10 messages
+            if (
+              allMessages[allMessages.length - 1].timestamp ===
+              data[0].timestamp
+            ) {
+              // if so, get new messages in last 10
+              const newMessages = data.splice(1);
+              if (newMessages.length > 0) {
+                // push them to all messages
+                newMessages.map(newMessage => {
+                  allMessages.push(newMessage);
+                });
+                // update messages
+                this.setState({
+                  messages: allMessages
+                });
+              }
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }, 1000);
 
@@ -69,7 +97,7 @@ class ChatController extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  
+
   render() {
     return (
       <section className="ChatController">
