@@ -13,6 +13,7 @@
 
 .StyleModal h2 {
   text-align: center;
+  font-size: 3.5rem;
 }
 
 .StyleModalContainer {
@@ -29,7 +30,7 @@
 
 .InputName {
   margin-bottom: 2rem;
-  font-size: 5vmin;
+  font-size: 5rem;
   height: 5vmin;
   width: 50vmin;
 }
@@ -40,7 +41,7 @@
 .StartButton {
   background: none repeat scroll 0 0 transparent;
   color: #3895d0;
-  font-size: 2rem;
+  font-size: 3rem;
   text-decoration: none;
   text-indent: 0;
   border: 1px solid #3895d0;
