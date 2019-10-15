@@ -13,7 +13,8 @@ class ChatController extends Component {
   state = {
     value: "",
     name: "",
-    messages: []
+    messages: [], 
+    hasChatStarted: false
   };
 
   getMessageValue = e => {
@@ -22,9 +23,24 @@ class ChatController extends Component {
     });
   };
 
+
+  getUserName = e => {
+    if (e.target.value.length >= 1) {
+      this.setState({
+        name: e.target.value
+      });
+    }
+  };
+
+
   render() {
     return (
       <section className="ChatController">
+         <Modal
+          hasChatStarted={this.state.hasChatStarted}
+          change={this.getUserName}
+          startChat={this.startChat}
+        />
         <MessageDisplay messages={this.state.messages} name={this.state.name} />
         <ChatBar change={this.getMessageValue} />
       </section>
