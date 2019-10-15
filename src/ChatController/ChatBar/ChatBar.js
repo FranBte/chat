@@ -9,12 +9,15 @@ const ChatBar = props => {
     width: "100%",
     position: "fixed",
     bottom: "0"
-    
   };
   return (
     <section className="ChatBar" style={style}>
-        <ChatInput change={props.change} value={props.value}/>
-        <SendButton sendMessage={props.sendMessage}/>
+      <ChatInput
+        change={props.change}
+        value={props.value}
+        sendMessage={props.sendMessage}
+      />
+      <SendButton sendMessage={props.sendMessage} />
     </section>
   );
 };
