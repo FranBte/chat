@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./ChatController.css";
 import ChatBar from "./ChatBar/ChatBar";
 import MessageDisplay from "./MessageDisplay/MessageDisplay";
+import Modal from "./Modal/Modal";
 import APIClient from "../APIClient/APIClient";
 import token from "../token";
 
@@ -58,36 +59,42 @@ class ChatController extends Component {
             });
           isFirstRun = false;
         } else {
-          // if there are messages, get the last message from known messages
-          timestamp =
-            this.state.messages[this.state.messages.length - 1].timestamp - 1;
-        }
-        const getPromise = this.APIClient.getLastTenMessages(timestamp);
-        let allMessages = [...this.state.messages];
-        getPromise
-          .then(data => {
-            // check if last message in known messages is equal to first message in last 10 messages
-            if (
-              allMessages[allMessages.length - 1].timestamp ===
-              data[0].timestamp
-            ) {
-              // if so, get new messages in last 10
-              const newMessages = data.splice(1);
-              if (newMessages.length > 0) {
-                // push them to all messages
-                newMessages.map(newMessage => {
-                  allMessages.push(newMessage);
-                });
-                // update messages
-                this.setState({
-                  messages: allMessages
-                });
+          let timestamp;
+          // if there are no messages, get messages from now on
+          if (this.state.messages.length === 0) {
+            timestamp = Date.now();
+          } else {
+            // if there are messages, get the last message from known messages
+            timestamp =
+              this.state.messages[this.state.messages.length - 1].timestamp - 1;
+          }
+          const getPromise = this.APIClient.getLastTenMessages(timestamp);
+          let allMessages = [...this.state.messages];
+          getPromise
+            .then(data => {
+              // check if last message in known messages is equal to first message in last 10 messages
+              if (
+                allMessages[allMessages.length - 1].timestamp ===
+                data[0].timestamp
+              ) {
+                // if so, get new messages in last 10
+                const newMessages = data.splice(1);
+                if (newMessages.length > 0) {
+                  // push them to all messages
+                  newMessages.map(newMessage => {
+                    allMessages.push(newMessage);
+                  });
+                  // update messages
+                  this.setState({
+                    messages: allMessages
+                  });
+                }
               }
-            }
-          })
-          .catch(error => {
-            console.log(error);
-          });
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        }
       }
     }, 1000);
 
