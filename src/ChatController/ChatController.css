@@ -1,0 +1,12 @@
+:root {
+  font-size: 8px;
+}
+
+.ChatController {
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  font-family: "Fira Sans", sans-serif;
+}
+
