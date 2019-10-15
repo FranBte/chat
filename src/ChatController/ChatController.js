@@ -12,14 +12,19 @@ class ChatController extends Component {
   state = {
     value: "",
     name: "",
-    messages: [],
+    messages: []
+  };
+
+  getMessageValue = e => {
+    this.setState({
+      value: e.target.value
+    });
   };
 
   render() {
     return (
       <section className="ChatController">
-     
-        <ChatBar/>
+        <ChatBar change={this.getMessageValue} />
       </section>
     );
   }
