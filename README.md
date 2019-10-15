@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Doodle Chat - Code Challenge 
 
-## Available Scripts
+## Chat Setup
 
-In the project directory, you can run:
+### API Token 
+A token.js file with an API token should be added to this project for it to work in `src`. The token used for this project is ignored by GitHub. 
 
 ### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## User flow
+Upon entering the chat, the user can enter their name. If the user leaves this blank, an alert will appear on the page if the user tries to start the chat. Once the user enters their name and starts the chat, the user can see all messages. The user can automatically see the newer messages first at the bottom of the chat when the chat starts. The user can send messages by typing in the input field and clicking the send button. The user can see their message automatically send and can receive messages. 
 
-### `npm test`
+Information available to user: 
+- Author 
+- Message content 
+- Date and time message was sent 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Methodology 
+* I separated my tasks in two:
+    - UI task which outlined all of elements on the page. 
+    - API client which handles all of the requests and posts to the API. 
 
-### `npm run build`
+I believe separating these two tasks are important. The API client methods can be used throughout a bigger project so separating this makes the project clearer and allows for reusability. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once I had an outline of the design of the project, I chose to use react. I believe that creating components for the UI would be faster and would allow for reuse in a bigger project. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## How it works 
+All messages are called when the user starts the chat after inputting their name. After all messages are called, if there are any known messages, the last message in the array is stored. `getLastTenMessages` is called and gets any messages since the last known message. This function is called every second to continuously check if there are any new messages. If so, new messages are added to known messages, state is updated and they are all rendered on the screen. 
+ 
+Since we are checking for new messages (sent or received) every second, there might be a delay of one second to render a sent message. In order to remove that delay, every sent message sets state until the `getLastTenMessages` function is called. This updates the component so that the user gets automatic feedback when sending a message. 
+ 
+## Improvements 
+* Convert the HTML escape characters when sending a message. 
+* Create unit tests for the API.
+* Create unit tests for individual components.
+* Catch other errors since it seems that fetch only handles network errors.
+* Improve the project's handling of messages being sent too quickly.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Time taken to complete**: ~10hrs
