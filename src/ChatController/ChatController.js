@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./ChatController.css";
 import ChatBar from "./ChatBar/ChatBar";
+import MessageDisplay from "./MessageDisplay/MessageDisplay";
 import APIClient from "../APIClient/APIClient";
 import token from "../token";
 
@@ -24,6 +25,7 @@ class ChatController extends Component {
   render() {
     return (
       <section className="ChatController">
+        <MessageDisplay messages={this.state.messages} name={this.state.name} />
         <ChatBar change={this.getMessageValue} />
       </section>
     );
