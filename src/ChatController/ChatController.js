@@ -82,7 +82,7 @@ class ChatController extends Component {
                 if (newMessages.length > 0) {
                   // push them to all messages
                   newMessages.map(newMessage => {
-                    allMessages.push(newMessage);
+                   return allMessages.push(newMessage);
                   });
                   // update messages
                   this.setState({
@@ -97,8 +97,6 @@ class ChatController extends Component {
         }
       }
     }, 1000);
-
-    console.log("component did mount");
   }
 
   componentWillUnmount() {
