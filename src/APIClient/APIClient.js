@@ -15,17 +15,33 @@ class APIClient {
         message: input
       })
     });
+    if (response.status >= 400 && response.status < 600) {
+      throw new Error("Bad response from server");
+    }
     const content = await response.json();
     return content;
+  }
+
+  async getLastTenMessages(time) {
+    const apiCall = `${this.url}&since=${time}&limit=10`;
+    const response = await fetch(apiCall);
+    if (response.status >= 400 && response.status < 600) {
+      throw new Error("Bad response from server");
+    }
+    const data = await response.json();
+    return data;
   }
 
   async getAllMessages() {
     const apiCall = this.url;
     const response = await fetch(apiCall);
+    if (response.status >= 400 && response.status < 600) {
+      throw new Error("Bad response from server");
+    }
     const data = await response.json();
     return data;
   }
-
 }
 
 export default APIClient;
+
