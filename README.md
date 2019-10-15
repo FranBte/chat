@@ -11,7 +11,12 @@ Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## User flow
-Upon entering the chat, the user can enter their name. If the user leaves this blank, an alert will appear on the page if the user tries to start the chat. Once the user enters their name and starts the chat, the user can see all messages. The user can automatically see the newer messages first at the bottom of the chat when the chat starts. The user can send messages by typing in the input field and clicking the send button. The user can see their message automatically send and can receive messages. 
+* Upon entering the chat, the user can enter their name. 
+* If the user leaves this blank, an alert will appear on the page once the user tries to start the chat. 
+* Once the user enters a name and starts the chat, the user can see all messages. 
+* The user can automatically see the newer messages first at the bottom of the chat when the chat starts. 
+* The user can send messages by typing in the input field and clicking the send button/enter. 
+* The user can see can send receive messages. 
 
 Information available to user: 
 - Author 
