@@ -9,7 +9,11 @@ class ChatController extends Component {
     `https://chatty.kubernetes.doodle-test.com/api/chatty/v1.0`,
     token
   );
-
+  state = {
+    value: "",
+    name: "",
+    messages: [],
+  };
 
   render() {
     return (
