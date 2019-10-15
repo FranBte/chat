@@ -13,7 +13,7 @@ class ChatController extends Component {
   state = {
     value: "",
     name: "",
-    messages: [], 
+    messages: [],
     hasChatStarted: false
   };
 
@@ -41,17 +41,46 @@ class ChatController extends Component {
     }
   };
 
-
   render() {
     return (
       <section className="ChatController">
-         <Modal
+        <Modal
           hasChatStarted={this.state.hasChatStarted}
           change={this.getUserName}
           startChat={this.startChat}
         />
         <MessageDisplay messages={this.state.messages} name={this.state.name} />
-        <ChatBar change={this.getMessageValue} />
+        <ChatBar
+          change={this.getMessageValue}
+          value={this.state.value}
+          sendMessage={() => {
+            // if message is not empty
+            if (this.state.value !== "") {
+              // post message to api
+              this.APIClient.sendMessage(this.state.name, this.state.value)
+                .then(data => {
+                  // update state for immediate response
+                  let messages = [...this.state.messages];
+                  messages.push(data);
+                  this.setState({
+                    messages: messages,
+                    value: ""
+                  });
+                  // scroll to bottom if a message was sent
+                  window.scrollTo(
+                    0,
+                    document.querySelector("body").scrollHeight
+                  );
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            } else {
+              // if message is an empty string, alert
+              alert("Oopsies, we can't send an empty message!");
+            }
+          }}
+        />
       </section>
     );
   }
