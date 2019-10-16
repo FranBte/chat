@@ -49,11 +49,13 @@
   padding: 1vmin;
   cursor: pointer;
   margin-bottom: 5vmin;
+  transition: all 0.3s ease;
+
 }
 
 .StartButton:hover {
   transform: scale(1.1);
-  box-shadow: 3px 3px 5px black;
+  box-shadow: 3px 3px 5px rgb(80, 79, 79);
 }
 
 .StartButton:active {
